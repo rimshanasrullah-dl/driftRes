@@ -1,5 +1,5 @@
 import express from "express";
-
+const PORT = process.env.PORT || 3000;
 const app = express();
 
 const restaurants = [
@@ -68,6 +68,6 @@ app.use((req, res) => {
   res.status(404).json({ error: `Cannot ${req.method} ${req.url}` });
 });
 
-app.listen(3000, () => {
-  console.log("server running at port 3000");
+app.listen(PORT, () => {
+  console.log("server running at port ", PORT);
 });
