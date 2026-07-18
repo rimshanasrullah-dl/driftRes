@@ -16,7 +16,9 @@ function logger(req, res, next) {
 
 app.use(logger);
 app.use(express.json());
-
+app.use((req, res) => {
+  res.status(404).json({ error: `Cannot ${req.method} ${req.url}` });
+});
 app.get("/", (req, res) => {
   res.status(200).json({
     status: "ok",
@@ -52,7 +54,7 @@ app.get("/restaurants/:id", (req, res) => {
 });
 
 app.post("/restaurants", (req, res) => {
-  const { name, city } = req.body;
+  const { name, city } = req.body || {};
 
   if (!name || !city) {
     return res.status(400).json({ error: "name and city are required" });
@@ -62,10 +64,6 @@ app.post("/restaurants", (req, res) => {
   restaurants.push(newRes);
 
   res.status(201).json({ status: "ok", message: "New resturant added" });
-});
-
-app.use((req, res) => {
-  res.status(404).json({ error: `Cannot ${req.method} ${req.url}` });
 });
 
 app.listen(PORT, () => {
