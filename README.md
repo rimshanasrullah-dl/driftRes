@@ -76,7 +76,11 @@ Requires a MongoDB connection string and the environment variables listed in `.e
 ```bash
 npm test
 ```
+## API documentation
 
+Import `docs/postman-collection.json` into Postman to explore and test every endpoint.
+The base URL is set via the `baseUrl` collection variable — point it at the live API
+(`https://driftres.onrender.com`) or your local server.
 Covers registration, validation, and authentication flows using Jest and Supertest.
 
 ## What I learned building this
